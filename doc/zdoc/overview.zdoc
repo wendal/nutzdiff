@@ -1,0 +1,19 @@
+#title: NutzDiff 的工作原理
+#author:zozoh(zozohtnt@gmail.com)
+#index:0,1
+-------------------------------------------------------
+How NutzDiff work
+	
+	假设我们有两个这样的序列：
+	{{{
+	  a b c - 1 2 3 : x y z
+	b x @ x
+	- x x x @
+	1         @ x 
+	3             @ x
+	4             x x 
+	*               x   
+	y
+	z
+	x                 @
+	}}}
