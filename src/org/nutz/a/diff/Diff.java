@@ -1,9 +1,9 @@
 package org.nutz.a.diff;
 
-import java.util.List;
+import java.util.Iterator;
 
 public interface Diff<T> {
 
-	Difference diff(List<T> listA, List<T> listB);
+	Difference<T> diff(Iterator<T> ibase, Iterator<T> inew);
 
 }
