@@ -13,6 +13,14 @@ public class ChangeItem<T> implements DiffItem<T> {
 
 	private RemoveItem<T> remove;
 
+	public ChangeItem(StringTranslator<T> trans, String s) {
+		// 找到 ';' 分解字符串
+		int pos = s.indexOf(';');
+		remove = new RemoveItem<T>(s.substring(0, pos));
+		s = s.substring(pos + 1);
+		append = new AppendItem<T>(trans, s);
+	}
+
 	public ChangeItem(StringTranslator<T> trans, int l, int r, List<T> objs) {
 		append = new AppendItem<T>(trans, objs);
 		remove = new RemoveItem<T>(l, r);
@@ -31,7 +39,7 @@ public class ChangeItem<T> implements DiffItem<T> {
 
 	@Override
 	public String toString() {
-		return remove.toString() + this.append.toString();
+		return remove.toString() + ";" + this.append.toString();
 	}
 
 	@Override

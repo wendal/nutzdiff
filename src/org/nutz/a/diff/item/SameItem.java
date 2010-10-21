@@ -4,6 +4,8 @@ import java.util.Iterator;
 
 import org.nutz.a.diff.DiffAppender;
 import org.nutz.a.diff.DiffItem;
+import org.nutz.lang.Lang;
+import org.nutz.lang.Strings;
 
 public class SameItem<T> implements DiffItem<T> {
 
@@ -13,10 +15,19 @@ public class SameItem<T> implements DiffItem<T> {
 
 	private int len;
 
+	public SameItem(String s) {
+		String[] ss = Strings.splitIgnoreBlank(s.substring(1), ":");
+		len = Integer.parseInt(ss[0]);
+		l = Integer.parseInt(ss[1]);
+		r = Integer.parseInt(ss[2]);
+		if (len != (r - l))
+			throw Lang.makeThrow("Same Item invalid! %d != %d - %d", len, r, l);
+	}
+
 	public SameItem(int l, int r) {
 		this.l = l;
 		this.r = r;
-		this.len = r - 1;
+		this.len = r - l;
 	}
 
 	@Override
@@ -32,7 +43,7 @@ public class SameItem<T> implements DiffItem<T> {
 
 	@Override
 	public String toString() {
-		return String.format("===:%d:%d:%d", len, l, r);
+		return String.format("=%d:%d:%d", len, l, r);
 	}
 
 	@Override
