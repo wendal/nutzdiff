@@ -17,7 +17,7 @@ import org.nutz.lang.Strings;
 public class AppendItem<T> implements DiffItem<T> {
 
 	private List<T> objs;
-
+	
 	private StringTranslator<T> trans;
 
 	public AppendItem(StringTranslator<T> trans, String s) {

@@ -33,7 +33,7 @@ public class Difference<T> {
 	}
 
 	public Difference(StringTranslator<T> trans) {
-		this(trans, 5);
+		this(trans, 20);
 	}
 
 	public Difference<T> addSame(int l, int r) {
