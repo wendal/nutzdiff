@@ -37,17 +37,20 @@ public class Difference<T> {
 	}
 
 	public Difference<T> addSame(int l, int r) {
-		stack.push(new SameItem<T>(l, r));
+		if (r > l)
+			stack.push(new SameItem<T>(l, r));
 		return this;
 	}
 
 	public Difference<T> addRemove(int l, int r) {
-		stack.push(new RemoveItem<T>(l, r));
+		if (r > l)
+			stack.push(new RemoveItem<T>(l, r));
 		return this;
 	}
 
 	public Difference<T> addChange(int l, int r, List<T> objs) {
-		stack.push(new ChangeItem<T>(trans, l, r, objs));
+		if (r > l)
+			stack.push(new ChangeItem<T>(trans, l, r, objs));
 		return this;
 	}
 

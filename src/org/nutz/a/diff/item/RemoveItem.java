@@ -21,7 +21,7 @@ public class RemoveItem<T> implements DiffItem<T> {
 	private int len;
 
 	public RemoveItem(String s) {
-		String[] ss = Strings.splitIgnoreBlank(s.substring(1),":");
+		String[] ss = Strings.splitIgnoreBlank(s.substring(1), ":");
 		len = Integer.parseInt(ss[0]);
 		l = Integer.parseInt(ss[1]);
 		r = Integer.parseInt(ss[2]);
@@ -42,8 +42,11 @@ public class RemoveItem<T> implements DiffItem<T> {
 
 	@Override
 	public void render(Iterator<T> ibase, DiffAppender<T> appender) {
-		for (int i = 0; i < len; i++)
+		for (int i = 0; i < len; i++) {
+			if (!ibase.hasNext())
+				return;
 			ibase.next();
+		}
 	}
 
 	@Override
