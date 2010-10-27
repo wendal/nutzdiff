@@ -34,7 +34,7 @@ class DiffIterator<T> {
 	}
 
 	DiffIterator<T> cache(T obj) {
-		cache.addFirst(obj);
+		cache.add(obj);
 		return this;
 	}
 

@@ -59,9 +59,9 @@ class Diffing<T> {
 			T nw = inew.next();
 			// 找啊找，找到一个不同的对象，生成相同，并且处理一下缓存
 			if (!bs.equals(nw)) {
-				diff.addSame(left, ibase.getCurrentIndex());
 				ibase.clearCache().cache(bs).readyForNextReading();
 				inew.clearCache().cache(nw).readyForNextReading();
+				diff.addSame(left, ibase.getCurrentIndex());
 				return READ_MODE.CHANGE;
 			}
 		}
