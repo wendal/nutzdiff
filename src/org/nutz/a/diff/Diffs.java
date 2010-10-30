@@ -10,6 +10,7 @@ import org.nutz.a.diff.util.FileIterator;
 import org.nutz.a.diff.util.StringLineAppender;
 import org.nutz.a.diff.util.FileLineTranslator;
 import org.nutz.a.diff.util.WriterAppender;
+import org.nutz.lang.Lang;
 import org.nutz.lang.Streams;
 
 public abstract class Diffs {
@@ -17,6 +18,16 @@ public abstract class Diffs {
 	private static final StringTranslator<String> TN_STR = new FileLineTranslator();
 
 	private static final Diff<String> __DIFF = createDiff();
+
+	public static Difference<String> valueOf(String str) {
+		return valueOf(Lang.inr(str));
+	}
+
+	public static Difference<String> valueOf(Reader reader) {
+		Difference<String> diff = new Difference<String>(TN_STR);
+		diff.valueOf(reader);
+		return diff;
+	}
 
 	public static Iterator<String> itFile(String path) {
 		return new FileIterator(Streams.fileInr(path));

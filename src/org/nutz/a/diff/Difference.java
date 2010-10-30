@@ -26,13 +26,9 @@ public class Difference<T> {
 
 	private StringTranslator<T> trans;
 
-	public Difference(StringTranslator<T> trans, int width) {
+	public Difference(StringTranslator<T> trans) {
 		this.items = new LinkedList<DiffItem<T>>();
 		this.trans = trans;
-	}
-
-	public Difference(StringTranslator<T> trans) {
-		this(trans, 20);
 	}
 
 	public Difference<T> addSame(int l, int r) {
