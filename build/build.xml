@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="nutzdoc" default="go" basedir=".">
+
+	<description>This is nutzdoc autobuild file.</description>
+
+	<property environment="env" />
+
+	<property name="PROJECT_HOME" value="${env.PROJECT_HOME}" />
+	<property name="OUTPUT" value="${env.OUTPUT}" />
+	<property name="JAVA_HOME" value="${env.JAVA_HOME}" />
+	<property name="NUTZ" value="${env.NUTZ}" />
+
+	<property name="SRC" value="${PROJECT_HOME}/src" />
+	<property name="TMP" value="${PROJECT_HOME}/temp" />
+
+	<property name="v" value="-1.0" />
+
+	<path id="CLASSPATH">
+		<pathelement location="${NUTZ}" />
+		<pathelement location="${JAVA_HOME}/jre/javaws/javaws.jar" />
+		<pathelement location="${JAVA_HOME}/jre/lib/charsets.jar" />
+		<pathelement location="${JAVA_HOME}/jre/lib/rt.jar" />
+		<pathelement location="${JAVA_HOME}/lib/tools.jar" />
+	</path>
+
+
+	<target name="init" description="make dir">
+		<mkdir dir="${TMP}" />
+	</target>
+
+
+	<target name="compile" depends="init" description="compile src file">
+		<javac srcdir="${SRC}" destdir="${TMP}" encoding="UTF-8" debug="true" debuglevel="lines,vars,source" deprecation="true" nowarn="false" source="1.6" target="1.6">
+			<classpath refid="CLASSPATH" />
+		</javac>
+
+	</target>
+
+	<target name="jar" depends="compile" description="pacakge the classes to be a jar">
+		<jar destfile="${OUTPUT}/nutzdiff${v}.jar" basedir="${TMP}">
+			<manifest>
+				<attribute name="Main-Class" value="org.nutz.doc.Doc"/>
+			</manifest>
+		</jar>
+		<jar destfile="${OUTPUT}/nutzdiff-source${v}.jar" basedir="${SRC}" />
+	</target>
+
+
+	<target name="go" depends="jar">
+		<delete dir="${TMP}" />
+	</target>
+
+</project>
